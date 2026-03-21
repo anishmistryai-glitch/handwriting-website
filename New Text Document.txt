@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwriting Excellence | Master the Art of Writing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #b30000;
+            --gold: #d4af37;
+            --dark-blue: #002366;
+            --light-gold: #fdf5e6;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .enroll-btn {
+            background: var(--primary-red);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 25px;
+        }
+
+        /* --- Hero Banner --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(135deg, var(--primary-red) 0%, #7a0000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        /* Floating Elements */
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* --- What You'll Learn --- */
+        .section-padding { padding: 80px 10%; }
+
+        .learn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .learn-card {
+            background: var(--light-gold);
+            padding: 30px;
+            border-left: 5px solid var(--gold);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .learn-card:hover { transform: translateY(-5px); }
+        .learn-card h3 { color: var(--primary-red); margin-bottom: 10px; }
+
+        /* --- Why Choose Us --- */
+        .why-us { background: #f9f9f9; text-align: center; }
+        .why-us-content { max-width: 800px; margin: 0 auto; }
+
+        /* --- Age Banner --- */
+        .age-banner {
+            background: #FFD700;
+            padding: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 2rem;
+            color: var(--dark-blue);
+            text-transform: uppercase;
+        }
+
+        /* --- Limited Seats Blue Strip --- */
+        .cta-strip {
+            background: var(--dark-blue);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cta-strip button {
+            background: var(--gold);
+            border: none;
+            padding: 10px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .cta-strip button:hover { background: white; color: var(--dark-blue); }
+
+        /* --- Testimonials --- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-style: italic;
+        }
+
+        .parent-name {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-style: normal;
+            color: var(--primary-red);
+        }
+
+        /* --- Contact --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #222;
+            color: white;
+            padding: 40px 10%;
+            text-align: center;
+        }
+
+        .contact-info { margin: 20px 0; }
+        .contact-info a { color: var(--gold); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .contact-container, .testimonial-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Monika's Handwriting</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#ages">Ages</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact" class="enroll-btn">Enroll Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="floating-emoji" style="top:20%; left:10%;">✍️</div>
+        <div class="floating-emoji" style="top:15%; right:15%;">✨</div>
+        <div class="floating-emoji" style="bottom:20%; left:20%;">📝</div>
+        <div class="floating-emoji" style="bottom:25%; right:10%;">⭐</div>
+        
+        <h1>Master the Art of Penmanship</h1>
+        <p>Transform messy scribbles into elegant, legible, and effortless handwriting in just a few weeks.</p>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section id="features" class="section-padding">
+        <h2 style="text-align: center; color: var(--primary-red); font-size: 2.5rem;">What You'll Learn</h2>
+        <div class="learn-grid">
+            <div class="learn-card">
+                <h3>Ergonomics & Grip</h3>
+                <p>Correcting posture and pen hold to reduce hand fatigue and cramping during long writing sessions.</p>
+            </div>
+            <div class="learn-card">
+                <h3>Letter Anatomy</h3>
+                <p>Mastering consistent height, width, and spacing for every character for a professional look.</p>
+            </div>
+            <div class="learn-card">
+                <h3>Stroke & Slant</h3>
+                <p>Developing a uniform angle and fluid "muscle memory" for cleaner lines and better aesthetics.</p>
+            </div>
+            <div class="learn-card">
+                <h3>Rhythm & Connectivity</h3>
+                <p>Improving the flow between letters to increase writing speed without losing clarity.</p>
+            </div>
+            <div class="learn-card">
+                <h3>Style Refinement</h3>
+                <p>Polishing your personal signature or transitioning between print and cursive styles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="about" class="section-padding why-us">
+        <div class="why-us-content">
+            <h2 style="color: var(--dark-blue);">Why Choose Our Program?</h2>
+            <p style="margin-top: 20px; font-size: 1.1rem;">We don’t just fix letters; we rebuild your writing habit from the ground up. Our unique methodology combines ergonomic science with artistic flow, ensuring that your handwriting becomes faster, clearer, and more comfortable in just a few sessions.</p>
+        </div>
+    </section>
+
+    <!-- Ages Banner -->
+    <div id="ages" class="age-banner">
+        Suitable for Ages: 6 – 18 Years
+    </div>
+
+    <!-- CTA Strip -->
+    <div class="cta-strip">
+        <span>⚠️ Limited Seats Available for the Current Batch!</span>
+        <button onclick="document.getElementById('contact').scrollIntoView()">Enroll Now</button>
+    </div>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section-padding">
+        <h2 style="text-align: center; margin-bottom: 30px;">What Parents Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                "My son's teacher noticed the difference in just two weeks. His writing is now legible and he no longer complains about hand pain!"
+                <span class="parent-name">— Mrs. Sharma, Parent</span>
+            </div>
+            <div class="testimonial-card">
+                "The focus on posture and grip changed everything. My daughter actually enjoys writing her assignments now. Highly recommended!"
+                <span class="parent-name">— Mr. Gupta, Parent</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="section-padding" style="background: #fff;">
+        <div class="contact-container">
+            <div>
+                <h2 style="color: var(--primary-red); margin-bottom: 20px;">Get in Touch</h2>
+                <p>Fill out the form and we will get back to you with the batch timings and fee structure.</p>
+                <div class="contact-info">
+                    <p>📞 <strong>Phone:</strong> <a href="tel:8169411897">8169411897</a></p>
+                    <p>📧 <strong>Email:</strong> <a href="mailto:monikasupeda@gmail.com">monikasupeda@gmail.com</a></p>
+                </div>
+            </div>
+            <form action="#">
+                <input type="text" placeholder="Parent's Name" required>
+                <input type="text" placeholder="Child's Name" required>
+                <input type="number" placeholder="Child's Age" required>
+                <textarea rows="4" placeholder="Your Message"></textarea>
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Monika's Handwriting Excellence. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 1.2rem;">
+            <span>Follow Us: 📱 📸 📘</span>
+        </p>
+    </footer>
+
+</body>
+</html>
