@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monika's Handwriting Improvement Classes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #c01c2e;
+    --gold: #f5c400;
+    --gold-dark: #d4a200;
+    --navy: #1a2e6e;
+    --blue: #1e4db7;
+    --blue-light: #2563eb;
+    --cream: #fdf6e3;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #3d3d5c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+  .nav-logo .logo-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.1rem;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .nav-logo .logo-sub {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-logo-icon {
+    font-size: 1.6rem;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  nav ul li a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  nav ul li a:hover { color: var(--blue); background: #eef3ff; }
+  nav ul li.enroll a {
+    background: var(--blue);
+    color: white;
+    border-radius: 50px;
+    padding: 8px 22px;
+    box-shadow: 0 4px 14px rgba(30,77,183,0.25);
+    transition: background 0.2s, transform 0.15s;
+  }
+  nav ul li.enroll a:hover { background: var(--navy); transform: translateY(-2px); }
+
+  /* ─── HERO ─── */
+  #home {
+    position: relative;
+    background: linear-gradient(160deg, var(--red) 0%, #8b0000 100%);
+    padding: 60px 5% 0;
+    text-align: center;
+    overflow: hidden;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Stars */
+  .star {
+    position: absolute;
+    font-size: 1.8rem;
+    animation: starFloat 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .star:nth-child(1)  { top: 10%; left:  6%; animation-delay: 0s; }
+  .star:nth-child(2)  { top: 18%; left: 14%; animation-delay: 0.4s; font-size: 1.2rem; }
+  .star:nth-child(3)  { top:  8%; right: 8%; animation-delay: 0.8s; }
+  .star:nth-child(4)  { top: 22%; right:16%; animation-delay: 1.2s; font-size: 1.2rem; }
+  .star:nth-child(5)  { bottom:28%; left:3%; animation-delay: 0.6s; font-size: 1.4rem; }
+  .star:nth-child(6)  { bottom:32%; right:4%; animation-delay: 1s; font-size: 1.4rem; }
+
+  @keyframes starFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(15deg); }
+  }
+
+  /* Pencil kids */
+  .kid-float {
+    position: absolute;
+    bottom: 0;
+    font-size: 7rem;
+    animation: kidBounce 2.5s ease-in-out infinite;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .kid-left  { left: 4%; animation-delay: 0s; }
+  .kid-right { right: 4%; animation-delay: 0.6s; }
+  @keyframes kidBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+    text-shadow: 1px 2px 6px rgba(0,0,0,0.3);
+    animation: fadeSlideDown 0.7s ease both;
+  }
+  .hero-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    color: var(--gold);
+    text-shadow: 4px 6px 0 #7a0000, 0 2px 20px rgba(0,0,0,0.4);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    animation: fadeSlideDown 0.8s 0.1s ease both;
+  }
+  .hero-subtitle {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.2rem, 3.5vw, 2rem);
+    color: var(--white);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+    animation: fadeSlideDown 0.8s 0.2s ease both;
+  }
+  .hero-vacation {
+    display: inline-block;
+    margin-top: 18px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    letter-spacing: 0.12em;
+    padding: 10px 40px;
+    border-radius: 50px;
+    border: 3px solid var(--gold);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    animation: fadeSlideDown 0.8s 0.35s ease both, pulse 2.5s 1s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+    50% { box-shadow: 0 6px 36px rgba(245,196,0,0.5); }
+  }
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 72px 5%; }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 72px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 4px;
+    margin: 12px auto 0;
+  }
+
+  /* ─── WHAT YOU'LL LEARN ─── */
+  #features {
+    background: var(--white);
+  }
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .learn-card {
+    background: var(--cream);
+    border: 2px solid #f0e8c8;
+    border-radius: 20px;
+    padding: 32px 24px 28px;
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .learn-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    border-radius: 20px 20px 0 0;
+  }
+  .learn-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(26,46,110,0.12);
+  }
+  .learn-icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .learn-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .learn-card p {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* ─── WHY CHOOSE US ─── */
+  #about {
+    background: linear-gradient(135deg, var(--navy) 0%, #0f1f5e 100%);
+    color: white;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #about::before {
+    content: '✏️';
+    position: absolute;
+    font-size: 14rem;
+    opacity: 0.04;
+    right: -2%;
+    top: -10%;
+    transform: rotate(-20deg);
+    pointer-events: none;
+  }
+  #about .section-title { color: var(--gold); }
+  #about .section-title::after { background: var(--red); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .why-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #d4deff;
+  }
+  .why-text strong { color: var(--gold); }
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    transition: background 0.25s;
+  }
+  .stat-box:hover { background: rgba(255,255,255,0.12); }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.4rem;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: #aab6e0;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ─── AGES BANNER ─── */
+  #ages {
+    background: var(--gold);
+    padding: 40px 5%;
+    text-align: center;
+  }
+  .ages-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .ages-inner .emoji { font-size: 2.8rem; }
+  .ages-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── CTA STRIP ─── */
+  .cta-strip {
+    background: var(--blue);
+    padding: 28px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--white);
+    letter-spacing: 0.03em;
+  }
+  .cta-btn {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 40px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    letter-spacing: 0.06em;
+  }
+  .cta-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 28px rgba(0,0,0,0.25); }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials {
+    background: #f4f0e4;
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+    position: relative;
+    border-left: 5px solid var(--gold);
+    transition: transform 0.25s;
+  }
+  .testi-card:hover { transform: translateY(-6px); }
+  .testi-quote {
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 0.5;
+    font-family: Georgia, serif;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .testi-text {
+    font-size: 0.97rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 0.95rem;
+  }
+  .testi-role {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .stars-row { color: var(--gold); font-size: 1rem; margin-bottom: 4px; }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--white);
+  }
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    max-width: 960px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .contact-form h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  .form-field label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .form-field input,
+  .form-field textarea {
+    border: 2px solid #e0d8c0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    background: var(--cream);
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(30,77,183,0.12);
+  }
+  .form-field textarea { min-height: 110px; }
+  .submit-btn {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.05rem;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 36px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(212,162,0,0.3);
+    letter-spacing: 0.05em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,162,0,0.4); }
+
+  /* Contact info panel */
+  .contact-info {
+    background: linear-gradient(135deg, var(--navy), #0f1f5e);
+    border-radius: 24px;
+    padding: 40px 36px;
+    color: white;
+  }
+  .contact-info h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .info-icon {
+    font-size: 1.7rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .info-label {
+    font-size: 0.78rem;
+    color: #aab6e0;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: white;
+  }
+  .info-value a { color: var(--gold); text-decoration: none; }
+  .info-value a:hover { text-decoration: underline; }
+  .contact-book-emoji {
+    font-size: 5rem;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    animation: kidBounce 2.5s ease-in-out infinite;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    color: #8899cc;
+    padding: 22px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer p { font-size: 0.88rem; }
+  .social-icons { display: flex; gap: 14px; }
+  .social-icons a {
+    color: #8899cc;
+    font-size: 1.25rem;
+    transition: color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  .social-icons a:hover { color: var(--gold); transform: translateY(-2px); background: rgba(255,255,255,0.12); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav ul { gap: 2px; }
+    nav ul li a { font-size: 0.8rem; padding: 5px 8px; }
+    .why-grid, .contact-wrapper { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .kid-float { font-size: 4rem; }
+    .hero-title { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <span class="nav-logo-icon">∞</span>
+    <div>
+      <div class="logo-text">Monika's ∞</div>
+      <div class="logo-sub">Handwriting Improvement Classes</div>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#ages">Ages</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li class="enroll"><a href="#contact">Enroll Now</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="home">
+  <span class="star">⭐</span>
+  <span class="star">✨</span>
+  <span class="star">⭐</span>
+  <span class="star">✨</span>
+  <span class="star">⭐</span>
+  <span class="star">✨</span>
+
+  <div class="kid-float kid-left">🧒✏️</div>
+  <div class="kid-float kid-right">👧✏️</div>
+
+  <div style="position:relative; z-index:2;">
+    <div class="hero-badge">∞ Monika's ∞</div>
+    <div class="hero-title">HANDWRITING<br>IMPROVEMENT<br>CLASSES</div>
+    <div class="hero-vacation">✦ VACATION BATCH ✦</div>
+  </div>
+</section>
+
+<!-- ── WHAT YOU'LL LEARN ── -->
+<section id="features">
+  <h2 class="section-title">What You'll Learn</h2>
+  <div class="learn-grid">
+    <div class="learn-card reveal">
+      <span class="learn-icon">✋</span>
+      <h3>Ergonomics &amp; Grip</h3>
+      <p>Correcting posture and pen hold to reduce hand fatigue and cramping — so writing feels effortless.</p>
+    </div>
+    <div class="learn-card reveal">
+      <span class="learn-icon">🔤</span>
+      <h3>Letter Anatomy</h3>
+      <p>Mastering consistent height, width, and spacing for every character for a clean, uniform look.</p>
+    </div>
+    <div class="learn-card reveal">
+      <span class="learn-icon">〰️</span>
+      <h3>Stroke &amp; Slant</h3>
+      <p>Developing a uniform angle and fluid muscle memory for cleaner, more expressive lines.</p>
+    </div>
+    <div class="learn-card reveal">
+      <span class="learn-icon">🔗</span>
+      <h3>Rhythm &amp; Connectivity</h3>
+      <p>Improving the flow between letters to increase writing speed without losing clarity or neatness.</p>
+    </div>
+    <div class="learn-card reveal">
+      <span class="learn-icon">🎨</span>
+      <h3>Style Refinement</h3>
+      <p>Polishing your personal signature or transitioning gracefully between print and cursive styles.</p>
+    </div>
+    <div class="learn-card reveal">
+      <span class="learn-icon">💪</span>
+      <h3>Build Confidence</h3>
+      <p>Develop a legible, personal, and proud writing style that you'll feel great showing off every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY CHOOSE US ── -->
+<section id="about">
+  <h2 class="section-title">Why Choose Us</h2>
+  <div class="why-grid">
+    <div class="why-text reveal">
+      <p>We don't just fix letters — we <strong>rebuild your writing habit from the ground up.</strong></p>
+      <br>
+      <p>Our unique methodology combines <strong>ergonomic science with artistic flow</strong>, ensuring that your handwriting becomes faster, clearer, and more comfortable in just a few sessions.</p>
+      <br>
+      <p>Every child learns differently. That's why our curriculum is flexible, fun, and deeply personal — meeting each student exactly where they are and guiding them to where they want to be.</p>
+    </div>
+    <div class="why-stats reveal">
+      <div class="stat-box">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Students Transformed</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Years of Teaching</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Parent Satisfaction</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">6–18</span>
+        <span class="stat-label">Age Group Served</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AGES BANNER ── -->
+<section id="ages">
+  <div class="ages-inner">
+    <span class="emoji">📋</span>
+    <span class="ages-text">Ages: 6 – 18 Years</span>
+    <span class="emoji">📋</span>
+  </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+  <span class="cta-text">Limited Seats — Join Now!</span>
+  <a href="#contact" class="cta-btn">✏️ Enroll</a>
+</div>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <h2 class="section-title">What Parents Say</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <span class="testi-quote">"</span>
+      <div class="stars-row">★★★★★</div>
+      <p class="testi-text">I honestly couldn't believe the transformation in my daughter's handwriting within just two weeks. Her letters are now neat, consistent, and she actually enjoys writing. Monika's method is truly effective!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Anish Mistry</div>
+          <div class="testi-role">Parent of a 9-year-old</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <span class="testi-quote">"</span>
+      <div class="stars-row">★★★★★</div>
+      <p class="testi-text">My son's handwriting has improved so much — his teachers have noticed too! He holds the pencil correctly now and his confidence while writing has grown tremendously. Highly recommend!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👨</div>
+        <div>
+          <div class="testi-name">Arti Mistry</div>
+          <div class="testi-role">Parent of a 12-year-old</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-wrapper">
+    <div class="contact-form reveal">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Parent's Name</label>
+          <input type="text" placeholder="Your full name"/>
+        </div>
+        <div class="form-field">
+          <label>Child's Name</label>
+          <input type="text" placeholder="Child's full name"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Child's Age</label>
+        <input type="number" placeholder="e.g. 10" min="6" max="18"/>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your child's needs or ask any questions…"></textarea>
+      </div>
+      <button class="submit-btn">✉️ Get in Touch</button>
+    </div>
+
+    <div class="contact-info reveal">
+      <h3>Contact Monika</h3>
+      <div class="info-row">
+        <span class="info-icon">📞</span>
+        <div>
+          <div class="info-label">Phone / WhatsApp</div>
+          <div class="info-value"><a href="tel:8169411897">8169411897</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">✉️</span>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="mailto:monikasupeda@gmail.com">monikasupeda@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🌐</span>
+        <div>
+          <div class="info-label">Website</div>
+          <div class="info-value"><a href="https://monikashandwriting.com" target="_blank">monikashandwriting.com</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div>
+          <div class="info-label">Batch Timings</div>
+          <div class="info-value">Mon – Sat, 9 AM – 6 PM</div>
+        </div>
+      </div>
+      <span class="contact-book-emoji">📖</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© Monika's Handwriting Improvement Classes. All Rights Reserved.</p>
+  <div class="social-icons">
+    <a href="#" title="Facebook" aria-label="Facebook">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="#" title="Twitter/X" aria-label="Twitter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+    </a>
+    <a href="#" title="Instagram" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Smooth enroll scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Form submit
+  document.querySelector('.submit-btn').addEventListener('click', () => {
+    alert('Thank you! Monika will get back to you shortly. 📝');
+  });
+</script>
+</body>
+</html>
